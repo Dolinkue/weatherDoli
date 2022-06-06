@@ -32,14 +32,14 @@ struct ContentView: View {
                 Text(weatherVM.weather.name ?? "City")
                     .font(.custom("Arial", size: 80))
                     .foregroundColor(.white)
-                    .offset(y: -130)
+                    .offset(y: -75)
                     .padding()
             
                 TextField("Enter City", text: self.$city)
                     .padding()
                     .autocapitalization(.none)
                     .background(Color.gray.opacity(0.3).cornerRadius(10))
-                    .offset(y: -100)
+                    .offset(y: -80)
                    
                     
                     
@@ -73,7 +73,7 @@ struct ContentView: View {
                 Text(weatherVM.weather.main?.temperatureString ?? "")
                     .font(.custom("Arial", size: 80))
                     .foregroundColor(.white)
-                    .offset(y: 80)
+                    .offset(y: 20)
                     .padding()
                     
                 
@@ -89,5 +89,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+            .previewInterfaceOrientation(.portraitUpsideDown)
     }
 }
