@@ -7,9 +7,11 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     
     @ObservedObject var weatherVM: WeatherViewModel
+    @State var city: String = ""
     
     init() {
         self.weatherVM = WeatherViewModel()
@@ -25,17 +27,42 @@ struct ContentView: View {
                 .ignoresSafeArea()
             
             VStack() {
+                
+                
+                Text(weatherVM.weather.name ?? "City")
+                    .font(.custom("Arial", size: 80))
+                    .foregroundColor(.white)
+                    .offset(y: -130)
+                    .padding()
             
-                TextField("Enter City", text: self.$weatherVM.cityName) {
+                TextField("Enter City", text: self.$city)
+                    .padding()
+                    .autocapitalization(.none)
+                    .background(Color.gray.opacity(0.3).cornerRadius(10))
+                    .offset(y: -100)
+                   
+                    
+                    
+                Button("Search") {
+                    
+                    self.weatherVM.cityName = city
                     self.weatherVM.search()
+                    self.city = ""
+                    
+                    
+                    
                 }
-                .autocapitalization(.none)
-                .background()
-                .padding()
+                    .font(.custom("Arial", size: 40))
+                    .foregroundColor(.white)
+                    .offset(y: -50)
+                    .padding()
+                    
+                    
                 
                 
                 
-                Image(systemName:weatherVM.weather.weather?[0].conditionName ?? "cloud.bolt")
+                
+                Image(systemName:weatherVM.weather.weather?[0].conditionName ?? "")
                     .resizable()
                     .scaledToFill()
                     .frame(width: 150, height: 150)
@@ -43,7 +70,12 @@ struct ContentView: View {
                 
                 
                 
-                Text(weatherVM.weather.main?.temperatureString ?? "20")
+                Text(weatherVM.weather.main?.temperatureString ?? "")
+                    .font(.custom("Arial", size: 80))
+                    .foregroundColor(.white)
+                    .offset(y: 80)
+                    .padding()
+                    
                 
                 
             }.padding()
@@ -51,6 +83,7 @@ struct ContentView: View {
 
         }
     }
+
 }
 
 struct ContentView_Previews: PreviewProvider {
